@@ -73,7 +73,7 @@
             // 
             btnExit.FlatStyle = FlatStyle.Flat;
             btnExit.Font = new Font("Microsoft Sans Serif", 11F);
-            btnExit.Location = new Point(294, 253);
+            btnExit.Location = new Point(294, 243);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(150, 56);
             btnExit.TabIndex = 3;
