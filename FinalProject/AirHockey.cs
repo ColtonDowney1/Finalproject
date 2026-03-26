@@ -338,7 +338,7 @@ namespace AirHockey
                 currentGameState = GameState.GameOver;
                 gameTimer.Stop();
                 MessageBox.Show("Left Player Wins!");
-            }
+            } 
 
             if (rightScore >= WIN_SCORE)
             {
