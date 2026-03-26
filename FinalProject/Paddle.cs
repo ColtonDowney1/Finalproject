@@ -13,7 +13,7 @@ namespace AirHockey
 
         public Paddle(PictureBox pb, int paddleSpeed)
         {
-            paddleBox = pb; 
+            paddleBox = pb;  
             speed = paddleSpeed;
 
         }
