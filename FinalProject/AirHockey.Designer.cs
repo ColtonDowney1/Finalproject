@@ -47,7 +47,7 @@
             // 
             picRightPaddle.BackColor = Color.Transparent;
             picRightPaddle.Image = (Image)resources.GetObject("picRightPaddle.Image");
-            picRightPaddle.Location = new Point(605, 179);
+            picRightPaddle.Location = new Point(737, 220);
             picRightPaddle.Name = "picRightPaddle";
             picRightPaddle.Size = new Size(58, 50);
             picRightPaddle.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -57,7 +57,7 @@
             // picPuck
             // 
             picPuck.BackColor = SystemColors.ActiveCaptionText;
-            picPuck.Location = new Point(365, 190);
+            picPuck.Location = new Point(459, 220);
             picPuck.Name = "picPuck";
             picPuck.Size = new Size(28, 24);
             picPuck.TabIndex = 7;
@@ -66,7 +66,7 @@
             // picLeftPaddle
             // 
             picLeftPaddle.Image = (Image)resources.GetObject("picLeftPaddle.Image");
-            picLeftPaddle.Location = new Point(96, 179);
+            picLeftPaddle.Location = new Point(158, 220);
             picLeftPaddle.Name = "picLeftPaddle";
             picLeftPaddle.Size = new Size(58, 50);
             picLeftPaddle.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -121,7 +121,6 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = new Bitmap(@"Resources\Table.png");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(984, 561);
             Controls.Add(lblLeftScore);
