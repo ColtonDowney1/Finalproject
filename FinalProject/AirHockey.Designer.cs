@@ -47,7 +47,7 @@
             // 
             picRightPaddle.BackColor = Color.Transparent;
             picRightPaddle.Image = (Image)resources.GetObject("picRightPaddle.Image");
-            picRightPaddle.Location = new Point(737, 220);
+            picRightPaddle.Location = new Point(680, 246);
             picRightPaddle.Name = "picRightPaddle";
             picRightPaddle.Size = new Size(58, 50);
             picRightPaddle.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -57,7 +57,7 @@
             // picPuck
             // 
             picPuck.BackColor = SystemColors.ActiveCaptionText;
-            picPuck.Location = new Point(459, 220);
+            picPuck.Location = new Point(479, 272);
             picPuck.Name = "picPuck";
             picPuck.Size = new Size(28, 24);
             picPuck.TabIndex = 7;
@@ -66,7 +66,7 @@
             // picLeftPaddle
             // 
             picLeftPaddle.Image = (Image)resources.GetObject("picLeftPaddle.Image");
-            picLeftPaddle.Location = new Point(158, 220);
+            picLeftPaddle.Location = new Point(207, 246);
             picLeftPaddle.Name = "picLeftPaddle";
             picLeftPaddle.Size = new Size(58, 50);
             picLeftPaddle.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -79,7 +79,7 @@
             // 
             // btnBack
             // 
-            btnBack.Location = new Point(422, 31);
+            btnBack.Location = new Point(459, 41);
             btnBack.Name = "btnBack";
             btnBack.Size = new Size(75, 23);
             btnBack.TabIndex = 12;
@@ -91,24 +91,28 @@
             // lblRightScore
             // 
             lblRightScore.AutoSize = true;
-            lblRightScore.Location = new Point(665, 35);
+            lblRightScore.BackColor = Color.Transparent;
+            lblRightScore.Font = new Font("Segoe UI", 20F);
+            lblRightScore.Location = new Point(606, 9);
             lblRightScore.Name = "lblRightScore";
-            lblRightScore.Size = new Size(38, 15);
+            lblRightScore.Size = new Size(90, 37);
             lblRightScore.TabIndex = 10;
             lblRightScore.Text = "label2";
             // 
             // lblLeftScore
             // 
             lblLeftScore.AutoSize = true;
-            lblLeftScore.Location = new Point(158, 39);
+            lblLeftScore.BackColor = Color.Transparent;
+            lblLeftScore.Font = new Font("Segoe UI", 20F);
+            lblLeftScore.Location = new Point(299, 9);
             lblLeftScore.Name = "lblLeftScore";
-            lblLeftScore.Size = new Size(38, 15);
+            lblLeftScore.Size = new Size(90, 37);
             lblLeftScore.TabIndex = 9;
             lblLeftScore.Text = "label1";
             // 
             // btnStart
             // 
-            btnStart.Location = new Point(422, 2);
+            btnStart.Location = new Point(459, 9);
             btnStart.Name = "btnStart";
             btnStart.Size = new Size(75, 23);
             btnStart.TabIndex = 11;
@@ -121,6 +125,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(984, 561);
             Controls.Add(lblLeftScore);
@@ -133,9 +138,11 @@
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
+            MinimizeBox = false;
             Name = "AirHockey";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AirHockey";
+            Load += AirHockey_Load;
             KeyDown += AirHockey_KeyDown;
             KeyUp += AirHockey_KeyUp;
             ((System.ComponentModel.ISupportInitialize)picRightPaddle).EndInit();

@@ -9,7 +9,7 @@ namespace AirHockey
 
         private void btnInstructions_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Player 1 (BLUE) use W and S," + Environment.NewLine + "Player 2 (RED) use UP and DOWN keys.");
+            MessageBox.Show("Player 1 (BLUE) use W,A,S,D" + Environment.NewLine + "Player 2 (RED) use I,J,K,L.");
         }
 
         private void btnStartGame_Click(object sender, EventArgs e)
@@ -17,6 +17,10 @@ namespace AirHockey
             AirHockey gameForm = new AirHockey();
             gameForm.Show();
             this.Hide();
+            btnStartGame.Text = "START GAME";
+            btnStartGame.ForeColor = Color.White;
+            btnStartGame.Font = new Font("Arial", 12, FontStyle.Bold);
+
         }
 
         private void btnExit_Click(object sender, EventArgs e)

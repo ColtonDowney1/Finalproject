@@ -161,12 +161,12 @@ namespace AirHockey
                 rightDirection = PaddleDirection.None;
             }
 
-            if(e.KeyCode == Keys.J && rightDirection == PaddleDirection.Left)
+            if (e.KeyCode == Keys.J && rightDirection == PaddleDirection.Left)
             {
                 rightDirection = PaddleDirection.None;
             }
 
-            if(e.KeyCode == Keys.L && rightDirection == PaddleDirection.Right)
+            if (e.KeyCode == Keys.L && rightDirection == PaddleDirection.Right)
             {
                 rightDirection = PaddleDirection.None;
             }
@@ -186,7 +186,7 @@ namespace AirHockey
             CheckPaddleCollision();
             CheckForGoal();
             CheckWinner();
-            
+
         }
 
         private void MovePaddles()
@@ -203,7 +203,7 @@ namespace AirHockey
             }
 
             if (leftDirection == PaddleDirection.Left && picLeftPaddle.Left > 0)
-                 leftPaddle.MoveLeft();
+                leftPaddle.MoveLeft();
 
             if (leftDirection == PaddleDirection.Right && picLeftPaddle.Right < this.ClientSize.Width / 2)
                 leftPaddle.MoveRight();
@@ -242,10 +242,10 @@ namespace AirHockey
 
         private void CheckSideWallBounce()
         {
-            
-            if(picPuck.Left <= 0 && !PuckIsInGoalRange())
+
+            if (picPuck.Left <= 0 && !PuckIsInGoalRange())
             {
-               puck.BounceHorizontal();
+                puck.BounceHorizontal();
                 picPuck.Left = 0;
             }
 
@@ -279,9 +279,9 @@ namespace AirHockey
                 }
             }
 
-             if (picPuck.Bounds.IntersectsWith(picRightPaddle.Bounds))
+            if (picPuck.Bounds.IntersectsWith(picRightPaddle.Bounds))
             {
-               puck.speedX = -Math.Abs(puck.speedX);
+                puck.speedX = -Math.Abs(puck.speedX);
 
                 int paddleCenter = picRightPaddle.Top + (picRightPaddle.Height / 2);
                 int puckCenter = picPuck.Top + (picPuck.Height / 2);
@@ -300,7 +300,7 @@ namespace AirHockey
                 }
             }
 
-            
+
         }
 
         private bool PuckIsInGoalRange()
@@ -308,13 +308,13 @@ namespace AirHockey
             int puckCenterY = picPuck.Top + (picPuck.Height / 2);
 
             return puckCenterY >= goalTop && puckCenterY <= goalBottom;
-            
+
         }
-        
+
 
         private void CheckForGoal()
         {
-         
+
 
             if (picPuck.Left <= 0 && PuckIsInGoalRange())
             {
@@ -338,7 +338,7 @@ namespace AirHockey
                 currentGameState = GameState.GameOver;
                 gameTimer.Stop();
                 MessageBox.Show("Left Player Wins!");
-            } 
+            }
 
             if (rightScore >= WIN_SCORE)
             {
@@ -357,6 +357,9 @@ namespace AirHockey
             puck.speedY = 15;
         }
 
-        
+        private void AirHockey_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

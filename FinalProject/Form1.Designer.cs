@@ -1,4 +1,6 @@
-﻿namespace AirHockey
+﻿using AirHockey.Properties;
+
+namespace AirHockey
 {
     partial class Form1
     {
@@ -28,70 +30,113 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             lblTitle = new Label();
             btnInstructions = new Button();
             btnStartGame = new Button();
             btnExit = new Button();
+            label1 = new Label();
+            panel1 = new Panel();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // lblTitle
             // 
             lblTitle.AutoSize = true;
-            lblTitle.Font = new Font("Microsoft Sans Serif", 30F);
-            lblTitle.Location = new Point(239, 9);
+            lblTitle.BackColor = Color.Transparent;
+            lblTitle.Font = new Font("Perpetua Titling MT", 35.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblTitle.ForeColor = Color.Navy;
+            lblTitle.Location = new Point(236, 21);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(265, 46);
+            lblTitle.Size = new Size(349, 56);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "AIR HOCKEY";
             lblTitle.Click += lblTitle_Click;
             // 
             // btnInstructions
             // 
+            btnInstructions.BackColor = Color.Navy;
+            btnInstructions.FlatAppearance.BorderSize = 0;
             btnInstructions.FlatStyle = FlatStyle.Flat;
-            btnInstructions.Font = new Font("Microsoft Sans Serif", 11F);
-            btnInstructions.Location = new Point(294, 97);
+            btnInstructions.Font = new Font("Perpetua Titling MT", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnInstructions.ForeColor = Color.White;
+            btnInstructions.Location = new Point(0, 67);
             btnInstructions.Name = "btnInstructions";
-            btnInstructions.Size = new Size(150, 45);
+            btnInstructions.Size = new Size(180, 50);
             btnInstructions.TabIndex = 1;
             btnInstructions.Text = "Instructions";
-            btnInstructions.UseVisualStyleBackColor = true;
+            btnInstructions.UseVisualStyleBackColor = false;
             btnInstructions.Click += btnInstructions_Click;
             // 
             // btnStartGame
             // 
+            btnStartGame.BackColor = Color.Navy;
+            btnStartGame.BackgroundImageLayout = ImageLayout.Stretch;
+            btnStartGame.FlatAppearance.BorderSize = 0;
             btnStartGame.FlatStyle = FlatStyle.Flat;
-            btnStartGame.Font = new Font("Microsoft Sans Serif", 11F);
-            btnStartGame.Location = new Point(294, 174);
+            btnStartGame.Font = new Font("Perpetua Titling MT", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnStartGame.ForeColor = Color.White;
+            btnStartGame.Location = new Point(0, 0);
             btnStartGame.Name = "btnStartGame";
-            btnStartGame.Size = new Size(150, 45);
+            btnStartGame.Size = new Size(180, 50);
             btnStartGame.TabIndex = 2;
-            btnStartGame.Text = "Start Game";
-            btnStartGame.UseVisualStyleBackColor = true;
+            btnStartGame.Text = "Game Start";
+            btnStartGame.UseVisualStyleBackColor = false;
             btnStartGame.Click += btnStartGame_Click;
             // 
             // btnExit
             // 
+            btnExit.BackColor = Color.Navy;
+            btnExit.FlatAppearance.BorderSize = 0;
             btnExit.FlatStyle = FlatStyle.Flat;
-            btnExit.Font = new Font("Microsoft Sans Serif", 11F);
-            btnExit.Location = new Point(294, 243);
+            btnExit.Font = new Font("Perpetua Titling MT", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnExit.ForeColor = Color.White;
+            btnExit.Location = new Point(0, 133);
             btnExit.Name = "btnExit";
-            btnExit.Size = new Size(150, 56);
+            btnExit.Size = new Size(180, 50);
             btnExit.TabIndex = 3;
             btnExit.Text = "Exit";
-            btnExit.UseVisualStyleBackColor = true;
+            btnExit.UseVisualStyleBackColor = false;
             btnExit.Click += btnExit_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Perpetua Titling MT", 15F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.SlateGray;
+            label1.Location = new Point(282, 77);
+            label1.Name = "label1";
+            label1.Size = new Size(258, 24);
+            label1.TabIndex = 4;
+            label1.Text = "2 Player Air Hockey";
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.LightSkyBlue;
+            panel1.Controls.Add(btnStartGame);
+            panel1.Controls.Add(btnInstructions);
+            panel1.Controls.Add(btnExit);
+            panel1.ForeColor = SystemColors.ActiveCaption;
+            panel1.Location = new Point(309, 131);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(181, 184);
+            panel1.TabIndex = 5;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
-            Controls.Add(btnExit);
-            Controls.Add(btnStartGame);
-            Controls.Add(btnInstructions);
+            Controls.Add(panel1);
+            Controls.Add(label1);
             Controls.Add(lblTitle);
+            DoubleBuffered = true;
             Name = "Form1";
             Text = "Form1";
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -102,5 +147,7 @@
         private Button btnInstructions;
         private Button btnStartGame;
         private Button btnExit;
+        private Label label1;
+        private Panel panel1;
     }
 }
