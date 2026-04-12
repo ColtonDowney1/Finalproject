@@ -47,9 +47,10 @@
             // 
             picRightPaddle.BackColor = Color.Transparent;
             picRightPaddle.Image = (Image)resources.GetObject("picRightPaddle.Image");
-            picRightPaddle.Location = new Point(680, 246);
+            picRightPaddle.Location = new Point(710, 238);
+            picRightPaddle.Margin = new Padding(3, 4, 3, 4);
             picRightPaddle.Name = "picRightPaddle";
-            picRightPaddle.Size = new Size(58, 50);
+            picRightPaddle.Size = new Size(66, 67);
             picRightPaddle.SizeMode = PictureBoxSizeMode.CenterImage;
             picRightPaddle.TabIndex = 8;
             picRightPaddle.TabStop = false;
@@ -57,18 +58,20 @@
             // picPuck
             // 
             picPuck.BackColor = SystemColors.ActiveCaptionText;
-            picPuck.Location = new Point(479, 272);
+            picPuck.Location = new Point(474, 261);
+            picPuck.Margin = new Padding(3, 4, 3, 4);
             picPuck.Name = "picPuck";
-            picPuck.Size = new Size(28, 24);
+            picPuck.Size = new Size(32, 32);
             picPuck.TabIndex = 7;
             picPuck.TabStop = false;
             // 
             // picLeftPaddle
             // 
             picLeftPaddle.Image = (Image)resources.GetObject("picLeftPaddle.Image");
-            picLeftPaddle.Location = new Point(207, 246);
+            picLeftPaddle.Location = new Point(243, 238);
+            picLeftPaddle.Margin = new Padding(3, 4, 3, 4);
             picLeftPaddle.Name = "picLeftPaddle";
-            picLeftPaddle.Size = new Size(58, 50);
+            picLeftPaddle.Size = new Size(66, 67);
             picLeftPaddle.SizeMode = PictureBoxSizeMode.CenterImage;
             picLeftPaddle.TabIndex = 6;
             picLeftPaddle.TabStop = false;
@@ -79,9 +82,10 @@
             // 
             // btnBack
             // 
-            btnBack.Location = new Point(459, 41);
+            btnBack.Location = new Point(449, 51);
+            btnBack.Margin = new Padding(3, 4, 3, 4);
             btnBack.Name = "btnBack";
-            btnBack.Size = new Size(75, 23);
+            btnBack.Size = new Size(86, 31);
             btnBack.TabIndex = 12;
             btnBack.TabStop = false;
             btnBack.Text = "Back";
@@ -93,9 +97,9 @@
             lblRightScore.AutoSize = true;
             lblRightScore.BackColor = Color.Transparent;
             lblRightScore.Font = new Font("Segoe UI", 20F);
-            lblRightScore.Location = new Point(606, 9);
+            lblRightScore.Location = new Point(593, 12);
             lblRightScore.Name = "lblRightScore";
-            lblRightScore.Size = new Size(90, 37);
+            lblRightScore.Size = new Size(109, 46);
             lblRightScore.TabIndex = 10;
             lblRightScore.Text = "label2";
             // 
@@ -104,17 +108,18 @@
             lblLeftScore.AutoSize = true;
             lblLeftScore.BackColor = Color.Transparent;
             lblLeftScore.Font = new Font("Segoe UI", 20F);
-            lblLeftScore.Location = new Point(299, 9);
+            lblLeftScore.Location = new Point(267, 12);
             lblLeftScore.Name = "lblLeftScore";
-            lblLeftScore.Size = new Size(90, 37);
+            lblLeftScore.Size = new Size(109, 46);
             lblLeftScore.TabIndex = 9;
             lblLeftScore.Text = "label1";
             // 
             // btnStart
             // 
-            btnStart.Location = new Point(459, 9);
+            btnStart.Location = new Point(449, 12);
+            btnStart.Margin = new Padding(3, 4, 3, 4);
             btnStart.Name = "btnStart";
-            btnStart.Size = new Size(75, 23);
+            btnStart.Size = new Size(86, 31);
             btnStart.TabIndex = 11;
             btnStart.TabStop = false;
             btnStart.Text = "Start";
@@ -123,11 +128,11 @@
             // 
             // AirHockey
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(984, 561);
+            ClientSize = new Size(982, 553);
             Controls.Add(lblLeftScore);
             Controls.Add(btnStart);
             Controls.Add(lblRightScore);
@@ -137,6 +142,7 @@
             Controls.Add(picLeftPaddle);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "AirHockey";

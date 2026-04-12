@@ -1,10 +1,21 @@
+using System.Media;
 namespace AirHockey
 {
     public partial class Form1 : Form
     {
+            SoundPlayer menuMusic = new SoundPlayer(Application.StartupPath + @"\Resources\menu.wav");
         public Form1()
         {
             InitializeComponent();
+
+            try
+            {
+                menuMusic.PlayLooping();
+            }
+            catch
+            {
+                MessageBox.Show("Error: Menu music file not found.");
+            }
         }
 
         private void btnInstructions_Click(object sender, EventArgs e)
@@ -14,6 +25,8 @@ namespace AirHockey
 
         private void btnStartGame_Click(object sender, EventArgs e)
         {
+            menuMusic.Stop();
+
             AirHockey gameForm = new AirHockey();
             gameForm.Show();
             this.Hide();
@@ -25,6 +38,7 @@ namespace AirHockey
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            menuMusic.Stop();
             Application.Exit();
         }
 

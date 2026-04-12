@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -33,17 +34,23 @@ namespace AirHockey
         int rightScore = 0;
         int goalTop = 200;
         int goalBottom = 380;
-
+        Random rand = new Random();
         const int WIN_SCORE = 5;
 
         Paddle leftPaddle;
         Paddle rightPaddle;
         Puck puck;
 
-        PaddleDirection leftDirection = PaddleDirection.None;
-        PaddleDirection rightDirection = PaddleDirection.None;
+        PaddleDirection leftVertical = PaddleDirection.None;
+        PaddleDirection rightHorizontal = PaddleDirection.None;
+
+        PaddleDirection rightVertical = PaddleDirection.None;
+        PaddleDirection leftHorizontal = PaddleDirection.None;
 
         GameState currentGameState = GameState.Stopped;
+
+        SoundPlayer puckHitSound = new SoundPlayer(Application.StartupPath + @"\Resources\puckhit.wav");
+        SoundPlayer goalSirenSound = new SoundPlayer(Application.StartupPath + @"\Resources\goalsiren.wav");
 
         public AirHockey()
         {
@@ -51,9 +58,9 @@ namespace AirHockey
 
             this.KeyPreview = true;
 
-            leftPaddle = new Paddle(picLeftPaddle, 23);
-            rightPaddle = new Paddle(picRightPaddle, 23);
-            puck = new Puck(picPuck, 5, 10);
+            leftPaddle = new Paddle(picLeftPaddle, 18);
+            rightPaddle = new Paddle(picRightPaddle, 18);
+            puck = new Puck(picPuck, 7, 20);
 
             lblLeftScore.Text = "0";
             lblRightScore.Text = "0";
@@ -87,89 +94,60 @@ namespace AirHockey
 
         private void AirHockey_KeyDown(object sender, KeyEventArgs e)
         {
-            //Left paddle controls
+            // LEFT PLAYER
             if (e.KeyCode == Keys.W)
-            {
-                leftDirection = PaddleDirection.Up;
-            }
+                leftVertical = PaddleDirection.Up;
 
             if (e.KeyCode == Keys.S)
-            {
-                leftDirection = PaddleDirection.Down;
-            }
+                leftVertical = PaddleDirection.Down;
 
             if (e.KeyCode == Keys.A)
-            {
-                leftDirection |= PaddleDirection.Left;
-            }
-            if (e.KeyCode == Keys.D)
-            {
-                leftDirection |= PaddleDirection.Right;
-            }
+                leftHorizontal = PaddleDirection.Left;
 
-            //Right Paddle Controls
+            if (e.KeyCode == Keys.D)
+                leftHorizontal = PaddleDirection.Right;
+
+            // RIGHT PLAYER
             if (e.KeyCode == Keys.I)
-            {
-                rightDirection = PaddleDirection.Up;
-            }
+                rightVertical = PaddleDirection.Up;
 
             if (e.KeyCode == Keys.K)
-            {
-                rightDirection = PaddleDirection.Down;
-            }
+                rightVertical = PaddleDirection.Down;
 
             if (e.KeyCode == Keys.J)
-            {
-                rightDirection = PaddleDirection.Left;
-            }
+                rightHorizontal = PaddleDirection.Left;
 
             if (e.KeyCode == Keys.L)
-            {
-                rightDirection = PaddleDirection.Right;
-            }
+                rightHorizontal = PaddleDirection.Right;
         }
 
         private void AirHockey_KeyUp(object sender, KeyEventArgs e)
         {
-            //Left Paddle
-            if (e.KeyCode == Keys.W && leftDirection == PaddleDirection.Up)
-            {
-                leftDirection = PaddleDirection.None;
-            }
+            // LEFT PLAYER
+            if (e.KeyCode == Keys.W && leftVertical == PaddleDirection.Up)
+                leftVertical = PaddleDirection.None;
 
-            if (e.KeyCode == Keys.S && leftDirection == PaddleDirection.Down)
-            {
-                leftDirection = PaddleDirection.None;
-            }
-            if (e.KeyCode == Keys.A && leftDirection == PaddleDirection.Left)
-            {
-                leftDirection = PaddleDirection.None;
-            }
-            if (e.KeyCode == Keys.D && leftDirection == PaddleDirection.Right)
-            {
-                leftDirection = PaddleDirection.None;
-            }
+            if (e.KeyCode == Keys.S && leftVertical == PaddleDirection.Down)
+                leftVertical = PaddleDirection.None;
 
-            //Right Paddle
-            if (e.KeyCode == Keys.I && rightDirection == PaddleDirection.Up)
-            {
-                rightDirection = PaddleDirection.None;
-            }
+            if (e.KeyCode == Keys.A && leftHorizontal == PaddleDirection.Left)
+                leftHorizontal = PaddleDirection.None;
 
-            if (e.KeyCode == Keys.K && rightDirection == PaddleDirection.Down)
-            {
-                rightDirection = PaddleDirection.None;
-            }
+            if (e.KeyCode == Keys.D && leftHorizontal == PaddleDirection.Right)
+                leftHorizontal = PaddleDirection.None;
 
-            if (e.KeyCode == Keys.J && rightDirection == PaddleDirection.Left)
-            {
-                rightDirection = PaddleDirection.None;
-            }
+            // RIGHT PLAYER
+            if (e.KeyCode == Keys.I && rightVertical == PaddleDirection.Up)
+                rightVertical = PaddleDirection.None;
 
-            if (e.KeyCode == Keys.L && rightDirection == PaddleDirection.Right)
-            {
-                rightDirection = PaddleDirection.None;
-            }
+            if (e.KeyCode == Keys.K && rightVertical == PaddleDirection.Down)
+                rightVertical = PaddleDirection.None;
+
+            if (e.KeyCode == Keys.J && rightHorizontal == PaddleDirection.Left)
+                rightHorizontal = PaddleDirection.None;
+
+            if (e.KeyCode == Keys.L && rightHorizontal == PaddleDirection.Right)
+                rightHorizontal = PaddleDirection.None;
         }
 
         private void gameTimer_Tick(object sender, EventArgs e)
@@ -191,39 +169,32 @@ namespace AirHockey
 
         private void MovePaddles()
         {
-            //Left
-            if (leftDirection == PaddleDirection.Up && picLeftPaddle.Top > 0)
-            {
+            int middleX = this.ClientSize.Width / 2;
+
+            // LEFT PADDLE
+            if (leftVertical == PaddleDirection.Up && picLeftPaddle.Top > 0)
                 leftPaddle.MoveUp();
-            }
 
-            if (leftDirection == PaddleDirection.Down && picLeftPaddle.Bottom < this.ClientSize.Height)
-            {
+            if (leftVertical == PaddleDirection.Down && picLeftPaddle.Bottom < this.ClientSize.Height)
                 leftPaddle.MoveDown();
-            }
 
-            if (leftDirection == PaddleDirection.Left && picLeftPaddle.Left > 0)
+            if (leftHorizontal == PaddleDirection.Left && picLeftPaddle.Left > 0)
                 leftPaddle.MoveLeft();
 
-            if (leftDirection == PaddleDirection.Right && picLeftPaddle.Right < this.ClientSize.Width / 2)
+            if (leftHorizontal == PaddleDirection.Right && picLeftPaddle.Right < middleX)
                 leftPaddle.MoveRight();
 
-
-            //Right
-            if (rightDirection == PaddleDirection.Up && picRightPaddle.Top > 0)
-            {
+            // RIGHT PADDLE
+            if (rightVertical == PaddleDirection.Up && picRightPaddle.Top > 0)
                 rightPaddle.MoveUp();
-            }
 
-            if (rightDirection == PaddleDirection.Down && picRightPaddle.Bottom < this.ClientSize.Height)
-            {
+            if (rightVertical == PaddleDirection.Down && picRightPaddle.Bottom < this.ClientSize.Height)
                 rightPaddle.MoveDown();
-            }
 
-            if (rightDirection == PaddleDirection.Left && picRightPaddle.Left > this.ClientSize.Width / 2)
+            if (rightHorizontal == PaddleDirection.Left && picRightPaddle.Left > middleX)
                 rightPaddle.MoveLeft();
 
-            if (rightDirection == PaddleDirection.Right && picRightPaddle.Right < this.ClientSize.Width)
+            if (rightHorizontal == PaddleDirection.Right && picRightPaddle.Right < this.ClientSize.Width)
                 rightPaddle.MoveRight();
         }
 
@@ -231,6 +202,7 @@ namespace AirHockey
         {
             if (picPuck.Top <= 0)
             {
+                picPuck.Top = 0;
                 puck.BounceVertical();
             }
 
@@ -260,47 +232,126 @@ namespace AirHockey
         {
             if (picPuck.Bounds.IntersectsWith(picLeftPaddle.Bounds))
             {
-                puck.speedX = Math.Abs(puck.speedX);
+                puckHitSound.Play();
+
+
+                picPuck.Left = picLeftPaddle.Right;
+
+                puck.speedX = Math.Abs(puck.speedX) + 3;
 
                 int paddleCenter = picLeftPaddle.Top + (picLeftPaddle.Height / 2);
                 int puckCenter = picPuck.Top + (picPuck.Height / 2);
+                int difference = puckCenter - paddleCenter;
 
-                if (puckCenter < paddleCenter - 15)
+                if (difference < -20)
                 {
-                    puck.speedY = -5;
+                    puck.speedY = -6;
                 }
-                else if (puckCenter > paddleCenter + 15)
+                else if (difference < -5)
                 {
-                    puck.speedY = 5;
+                    puck.speedY = -3;
+                }
+                else if (difference > 20)
+                {
+                    puck.speedY = 6;
+                }
+                else if (difference > 5)
+                {
+                    puck.speedY = 3;
                 }
                 else
                 {
-                    puck.speedY = 0;
+                    if (puck.speedY < 0)
+                        puck.speedY = -2;
+                    else
+                        puck.speedY = 2;
                 }
+
+                if (leftVertical == PaddleDirection.Up)
+                {
+                    puck.speedY -= 2;
+                }
+                else if (leftVertical == PaddleDirection.Down)
+                {
+                    puck.speedY += 2;
+                }
+                else if (leftHorizontal == PaddleDirection.Right)
+                {
+                    puck.speedX += 1;
+                }
+                else if (leftHorizontal == PaddleDirection.Left)
+                {
+                    puck.speedX -= 1;
+                }
+
+                LimitPuckSpeed();
             }
 
             if (picPuck.Bounds.IntersectsWith(picRightPaddle.Bounds))
             {
-                puck.speedX = -Math.Abs(puck.speedX);
+                puckHitSound.Play();
+
+                picPuck.Left = picRightPaddle.Left - picPuck.Width;
+
+                puck.speedX = -Math.Abs(puck.speedX) - 3;
 
                 int paddleCenter = picRightPaddle.Top + (picRightPaddle.Height / 2);
                 int puckCenter = picPuck.Top + (picPuck.Height / 2);
+                int difference = puckCenter - paddleCenter;
 
-                if (puckCenter < paddleCenter - 15)
+                if (difference < -20)
                 {
-                    puck.speedY = -5;
+                    puck.speedY = -6;
                 }
-                else if (puckCenter > paddleCenter + 15)
+                else if (difference < -5)
                 {
-                    puck.speedY = 5;
+                    puck.speedY = -3;
+                }
+                else if (difference > 20)
+                {
+                    puck.speedY = 6;
+                }
+                else if (difference > 5)
+                {
+                    puck.speedY = 3;
                 }
                 else
                 {
-                    puck.speedY = 0;
+                    if (puck.speedY < 0)
+                        puck.speedY = -2;
+                    else
+                        puck.speedY = 2;
+                }
+
+                if (rightVertical == PaddleDirection.Up)
+                {
+                    puck.speedY -= 2;
+                }
+                else if (rightVertical == PaddleDirection.Down)
+                {
+                    puck.speedY += 2;
+                }
+                else if (rightVertical == PaddleDirection.Right)
+                {
+                    puck.speedX += 1;
+                }
+                else if (rightVertical == PaddleDirection.Left)
+                {
+                    puck.speedX -= 1;
                 }
             }
+        }
+        private void LimitPuckSpeed()
+        {
+            if (puck.speedX > 20)
+                puck.speedX = 20;
+            if (puck.speedX < -20)
+                puck.speedX = -20;
 
-
+            if (puck.speedY > 13)
+                puck.speedY = 13;
+            if (puck.speedY < -13)
+                puck.speedY = -13;
         }
 
         private bool PuckIsInGoalRange()
@@ -320,6 +371,9 @@ namespace AirHockey
             {
                 rightScore++;
                 lblRightScore.Text = rightScore.ToString();
+
+                goalSirenSound.Play();
+
                 ResetPuck();
             }
 
@@ -327,6 +381,9 @@ namespace AirHockey
             {
                 leftScore++;
                 lblLeftScore.Text = leftScore.ToString();
+
+                goalSirenSound.Play();
+
                 ResetPuck();
             }
         }
@@ -353,8 +410,13 @@ namespace AirHockey
             picPuck.Left = (this.ClientSize.Width / 2) - (picPuck.Width / 2);
             picPuck.Top = (this.ClientSize.Height / 2) - (picPuck.Height / 2);
 
-            puck.speedX = 25;
-            puck.speedY = 15;
+            puck.speedX = rand.Next(0,2) == 0 ? 7 : -7;
+            puck.speedY = rand.Next(-6, 6);
+
+            if (puck.speedY == 0)
+            {
+                puck.speedY = 2;
+            }
         }
 
         private void AirHockey_Load(object sender, EventArgs e)

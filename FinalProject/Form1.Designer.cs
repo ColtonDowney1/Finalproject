@@ -46,9 +46,9 @@ namespace AirHockey
             lblTitle.BackColor = Color.Transparent;
             lblTitle.Font = new Font("Perpetua Titling MT", 35.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             lblTitle.ForeColor = Color.Navy;
-            lblTitle.Location = new Point(236, 21);
+            lblTitle.Location = new Point(249, 32);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(349, 56);
+            lblTitle.Size = new Size(439, 71);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "AIR HOCKEY";
             lblTitle.Click += lblTitle_Click;
@@ -60,9 +60,10 @@ namespace AirHockey
             btnInstructions.FlatStyle = FlatStyle.Flat;
             btnInstructions.Font = new Font("Perpetua Titling MT", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             btnInstructions.ForeColor = Color.White;
-            btnInstructions.Location = new Point(0, 67);
+            btnInstructions.Location = new Point(0, 89);
+            btnInstructions.Margin = new Padding(3, 4, 3, 4);
             btnInstructions.Name = "btnInstructions";
-            btnInstructions.Size = new Size(180, 50);
+            btnInstructions.Size = new Size(206, 67);
             btnInstructions.TabIndex = 1;
             btnInstructions.Text = "Instructions";
             btnInstructions.UseVisualStyleBackColor = false;
@@ -77,8 +78,9 @@ namespace AirHockey
             btnStartGame.Font = new Font("Perpetua Titling MT", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             btnStartGame.ForeColor = Color.White;
             btnStartGame.Location = new Point(0, 0);
+            btnStartGame.Margin = new Padding(3, 4, 3, 4);
             btnStartGame.Name = "btnStartGame";
-            btnStartGame.Size = new Size(180, 50);
+            btnStartGame.Size = new Size(206, 67);
             btnStartGame.TabIndex = 2;
             btnStartGame.Text = "Game Start";
             btnStartGame.UseVisualStyleBackColor = false;
@@ -91,9 +93,10 @@ namespace AirHockey
             btnExit.FlatStyle = FlatStyle.Flat;
             btnExit.Font = new Font("Perpetua Titling MT", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             btnExit.ForeColor = Color.White;
-            btnExit.Location = new Point(0, 133);
+            btnExit.Location = new Point(0, 177);
+            btnExit.Margin = new Padding(3, 4, 3, 4);
             btnExit.Name = "btnExit";
-            btnExit.Size = new Size(180, 50);
+            btnExit.Size = new Size(206, 67);
             btnExit.TabIndex = 3;
             btnExit.Text = "Exit";
             btnExit.UseVisualStyleBackColor = false;
@@ -105,9 +108,9 @@ namespace AirHockey
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Perpetua Titling MT", 15F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.SlateGray;
-            label1.Location = new Point(282, 77);
+            label1.Location = new Point(308, 103);
             label1.Name = "label1";
-            label1.Size = new Size(258, 24);
+            label1.Size = new Size(325, 30);
             label1.TabIndex = 4;
             label1.Text = "2 Player Air Hockey";
             // 
@@ -118,22 +121,24 @@ namespace AirHockey
             panel1.Controls.Add(btnInstructions);
             panel1.Controls.Add(btnExit);
             panel1.ForeColor = SystemColors.ActiveCaption;
-            panel1.Location = new Point(309, 131);
+            panel1.Location = new Point(353, 175);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(181, 184);
+            panel1.Size = new Size(207, 245);
             panel1.TabIndex = 5;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(panel1);
             Controls.Add(label1);
             Controls.Add(lblTitle);
             DoubleBuffered = true;
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
             Text = "Form1";
             panel1.ResumeLayout(false);
