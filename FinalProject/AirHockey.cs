@@ -150,8 +150,10 @@ namespace AirHockey
                 rightHorizontal = PaddleDirection.None;
         }
 
+        // This method runs every time the game time ticks.
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+            //If game is not currently played stop
             if (currentGameState != GameState.Playing)
             {
                 return;
@@ -169,6 +171,7 @@ namespace AirHockey
 
         private void MovePaddles()
         {
+            //Find middle of the form to prevent paddles from crossing into the other player's side
             int middleX = this.ClientSize.Width / 2;
 
             // LEFT PADDLE
@@ -197,7 +200,7 @@ namespace AirHockey
             if (rightHorizontal == PaddleDirection.Right && picRightPaddle.Right < this.ClientSize.Width)
                 rightPaddle.MoveRight();
         }
-
+        // This method makes the puck bounce off the walls
         private void CheckWallBounce()
         {
             if (picPuck.Top <= 0)
@@ -212,6 +215,7 @@ namespace AirHockey
             }
         }
 
+        // This method makes the puck bounce off the left and right walls, but only if it's not in the goal range
         private void CheckSideWallBounce()
         {
 
@@ -228,21 +232,25 @@ namespace AirHockey
             }
         }
 
+        // This method checks if the puck hits either paddle and changes the puck's direction and speed accordingly
         private void CheckPaddleCollision()
         {
             if (picPuck.Bounds.IntersectsWith(picLeftPaddle.Bounds))
             {
                 puckHitSound.Play();
 
-
+                //move puck so it is no longer inside the paddle
                 picPuck.Left = picLeftPaddle.Right;
 
+                //Send puck right and increase speed
                 puck.speedX = Math.Abs(puck.speedX) + 3;
 
+                //Finds center of paddle and puck
                 int paddleCenter = picLeftPaddle.Top + (picLeftPaddle.Height / 2);
                 int puckCenter = picPuck.Top + (picPuck.Height / 2);
                 int difference = puckCenter - paddleCenter;
 
+                //If the puck hits the top of the paddle send it up, if it hits the bottom send it down, if it hits the middle keep it straight
                 if (difference < -20)
                 {
                     puck.speedY = -6;
@@ -266,7 +274,7 @@ namespace AirHockey
                     else
                         puck.speedY = 2;
                 }
-
+                //add a little extra speed if the paddle is moving in a direction when it hits the puck
                 if (leftVertical == PaddleDirection.Up)
                 {
                     puck.speedY -= 2;
@@ -283,7 +291,7 @@ namespace AirHockey
                 {
                     puck.speedX -= 1;
                 }
-
+               // Prevent puck from becoming too fast;
                 LimitPuckSpeed();
             }
 
@@ -343,30 +351,32 @@ namespace AirHockey
         }
         private void LimitPuckSpeed()
         {
+            //Limits horizontal speed
             if (puck.speedX > 20)
                 puck.speedX = 20;
             if (puck.speedX < -20)
                 puck.speedX = -20;
 
+            // Limits vertical speed
             if (puck.speedY > 13)
                 puck.speedY = 13;
             if (puck.speedY < -13)
                 puck.speedY = -13;
         }
-
+        // this method checks if the puck is in the goal range from the top to bottom of the goal
         private bool PuckIsInGoalRange()
         {
+            // find puck center
             int puckCenterY = picPuck.Top + (picPuck.Height / 2);
 
             return puckCenterY >= goalTop && puckCenterY <= goalBottom;
 
         }
 
-
+        // checks if puck scored on left or right side and updates score, plays sound, and resets puck
         private void CheckForGoal()
         {
-
-
+            // if it goes in left side right player scores
             if (picPuck.Left <= 0 && PuckIsInGoalRange())
             {
                 rightScore++;
@@ -376,7 +386,7 @@ namespace AirHockey
 
                 ResetPuck();
             }
-
+            // if it goes in right side left player scores
             if (picPuck.Right >= this.ClientSize.Width && PuckIsInGoalRange())
             {
                 leftScore++;
@@ -387,16 +397,16 @@ namespace AirHockey
                 ResetPuck();
             }
         }
-
+        // Either players reached the capped score set
         private void CheckWinner()
-        {
+        {// Check if left player wins
             if (leftScore >= WIN_SCORE)
             {
                 currentGameState = GameState.GameOver;
                 gameTimer.Stop();
                 MessageBox.Show("Left Player Wins!");
             }
-
+            // Check if right player wins
             if (rightScore >= WIN_SCORE)
             {
                 currentGameState = GameState.GameOver;
@@ -404,13 +414,15 @@ namespace AirHockey
                 MessageBox.Show("Right Player Wins!");
             }
         }
-
+        // restes puck in the middle of the form and gives it a random direction and speed to start moving towards one of the players
         private void ResetPuck()
         {
+            // put puck in the center of the form
             picPuck.Left = (this.ClientSize.Width / 2) - (picPuck.Width / 2);
             picPuck.Top = (this.ClientSize.Height / 2) - (picPuck.Height / 2);
-
+            // random horizontal direction and speed
             puck.speedX = rand.Next(0,2) == 0 ? 7 : -7;
+            // random vertical speed
             puck.speedY = rand.Next(-6, 6);
 
             if (puck.speedY == 0)
